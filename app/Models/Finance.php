@@ -7,4 +7,8 @@ use Illuminate\Database\Eloquent\Model;
 class Finance extends Model
 {
     protected $guarded = ['id'];
+
+    protected $casts = [
+        'date' => 'date',
+    ];
 }

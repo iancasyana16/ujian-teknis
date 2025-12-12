@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\TaskController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\OrderController;
+use App\Http\Controllers\FinanceController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ProjectController;
 use App\Http\Controllers\CustomerController;
@@ -22,6 +23,7 @@ Route::middleware('auth')->group(function () {
     Route::resource('/projects', ProjectController::class);
     Route::resource('/tasks', TaskController::class);
     Route::resource('/orders', OrderController::class);
+    Route::resource('/finances', FinanceController::class);
 });
 
 Route::middleware('auth')->group(function () {
