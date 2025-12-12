@@ -7,10 +7,12 @@
 
     <div class="py-5 max-w-7xl mx-auto sm:px-6 lg:px-8 space-y-3">
 
-        <a href="{{ route('orders.create') }}"
-            class="inline-block bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 font-semibold">
-            Create Order
-        </a>
+        @can('orders.create')
+            <a href="{{ route('orders.create') }}"
+                class="inline-block bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 font-semibold">
+                Create Order
+            </a>
+        @endcan
 
         @if (session('success'))
             <div class="mb-4 p-4 bg-green-100 text-green-800 rounded">

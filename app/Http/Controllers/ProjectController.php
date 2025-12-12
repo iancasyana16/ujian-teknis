@@ -4,11 +4,14 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use App\Models\Project;
+use App\Policies\ProjectPolicy;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
+use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 
 class ProjectController extends Controller
 {
+    use AuthorizesRequests;
     public function index()
     {
         $projects = Project::with('manager')->paginate(10);
@@ -17,6 +20,7 @@ class ProjectController extends Controller
 
     public function create()
     {
+        $this->authorize('create', ProjectPolicy::class);
         $managers = User::all();
         return view('project.create', compact('managers'));
     }
@@ -41,6 +45,7 @@ class ProjectController extends Controller
 
     public function edit(Project $project)
     {
+        $this->authorize('edit', ProjectPolicy::class);
         $managers = User::all();
         return view('project.edit', compact('project', 'managers'));
     }
@@ -60,6 +65,7 @@ class ProjectController extends Controller
 
     public function destroy(Project $project)
     {
+        $this->authorize('delete', ProjectPolicy::class);
         $project->delete();
 
         return redirect()->route('projects.index')->with('success', 'Project deleted successfully.');

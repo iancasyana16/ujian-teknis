@@ -5,11 +5,14 @@ namespace App\Http\Controllers;
 use App\Models\Task;
 use App\Models\User;
 use App\Models\Project;
+use App\Policies\TaskPolicy;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
+use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 
 class TaskController extends Controller
 {
+    use AuthorizesRequests;
     public function index()
     {
         $tasks = Task::with(['project', 'assignedTo'])->paginate(10);
@@ -18,6 +21,7 @@ class TaskController extends Controller
 
     public function create()
     {
+        $this->authorize('create', TaskPolicy::class);
         $projects = Project::all();
         $users = User::all();
 
@@ -40,6 +44,7 @@ class TaskController extends Controller
 
     public function edit(Task $task)
     {
+        $this->authorize('edit', TaskPolicy::class);
         $projects = Project::all();
         $users = User::all();
 
@@ -62,6 +67,7 @@ class TaskController extends Controller
 
     public function destroy(Task $task)
     {
+        $this->authorize('delete', TaskPolicy::class);
         $task->delete();
 
         return redirect()->route('tasks.index')->with('success', 'Task deleted.');

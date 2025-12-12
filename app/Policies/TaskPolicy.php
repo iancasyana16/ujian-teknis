@@ -13,7 +13,7 @@ class TaskPolicy
      */
     public function viewAny(User $user): bool
     {
-        return $user->hasRole('super admin');
+        return $user->hasPermissionTo('tasks.view');
     }
 
     /**
@@ -21,7 +21,7 @@ class TaskPolicy
      */
     public function view(User $user, Task $task): bool
     {
-        return $user->hasRole('super admin');
+        return $user->hasPermissionTo('tasks.view');
     }
 
     /**
@@ -29,7 +29,7 @@ class TaskPolicy
      */
     public function create(User $user): bool
     {
-        return $user->hasRole('super admin');
+        return $user->hasPermissionTo('tasks.create');
     }
 
     /**
@@ -37,7 +37,7 @@ class TaskPolicy
      */
     public function update(User $user, Task $task): bool
     {
-        return $user->hasRole('super admin');
+        return $user->hasPermissionTo('tasks.update');
     }
 
     /**
@@ -45,7 +45,7 @@ class TaskPolicy
      */
     public function delete(User $user, Task $task): bool
     {
-        return $user->hasRole('super admin');
+        return $user->hasPermissionTo('tasks.delete');
     }
 
     /**
@@ -53,7 +53,7 @@ class TaskPolicy
      */
     public function restore(User $user, Task $task): bool
     {
-        return $user->hasRole('super admin');
+        return $user->hasPermissionTo('tasks.delete');
     }
 
     /**
@@ -61,6 +61,6 @@ class TaskPolicy
      */
     public function forceDelete(User $user, Task $task): bool
     {
-        return $user->hasRole('super admin');
+        return $user->hasPermissionTo('tasks.delete');
     }
 }

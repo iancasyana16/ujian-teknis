@@ -3,11 +3,12 @@
 namespace App\Providers;
 
 // use Illuminate\Support\ServiceProvider;
-use App\Models\Customer;
-use App\Models\Finance;
-use App\Models\Order;
-use App\Models\Project;
 use App\Models\Task;
+use App\Models\User;
+use App\Models\Order;
+use App\Models\Finance;
+use App\Models\Project;
+use App\Models\Customer;
 use App\Policies\UserPolicy;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
 

@@ -13,7 +13,7 @@ class FinancePolicy
      */
     public function viewAny(User $user): bool
     {
-        return $user->hasRole('super admin');
+        return $user->hasPermissionTo('finance.view');
     }
 
     /**
@@ -21,7 +21,7 @@ class FinancePolicy
      */
     public function view(User $user, Finance $finance): bool
     {
-        return $user->hasRole('super admin');
+        return $user->hasPermissionTo('finance.view');
     }
 
     /**
@@ -29,7 +29,7 @@ class FinancePolicy
      */
     public function create(User $user): bool
     {
-        return $user->hasRole('super admin');
+        return $user->hasPermissionTo('finance.view');
     }
 
     /**
@@ -37,7 +37,7 @@ class FinancePolicy
      */
     public function update(User $user, Finance $finance): bool
     {
-        return $user->hasRole('super admin');
+        return $user->hasPermissionTo('finance.view');
     }
 
     /**
@@ -45,7 +45,7 @@ class FinancePolicy
      */
     public function delete(User $user, Finance $finance): bool
     {
-        return $user->hasRole('super admin');
+        return $user->hasPermissionTo('finance.view');
     }
 
     /**
@@ -53,7 +53,7 @@ class FinancePolicy
      */
     public function restore(User $user, Finance $finance): bool
     {
-        return $user->hasRole('super admin');
+        return $user->hasPermissionTo('finance.view');
     }
 
     /**
@@ -61,6 +61,6 @@ class FinancePolicy
      */
     public function forceDelete(User $user, Finance $finance): bool
     {
-        return $user->hasRole('super admin');
+        return $user->hasPermissionTo('finance.view');
     }
 }

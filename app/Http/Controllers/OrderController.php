@@ -5,10 +5,13 @@ namespace App\Http\Controllers;
 use App\Models\Order;
 use App\Models\Customer;
 use Illuminate\Http\Request;
+use App\Policies\OrderPolicy;
 use Illuminate\Routing\Controller;
+use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 
 class OrderController extends Controller
 {
+    use AuthorizesRequests;
     public function index()
     {
         $orders = Order::with('customer')->paginate(10);
@@ -17,6 +20,7 @@ class OrderController extends Controller
 
     public function create()
     {
+        $this->authorize('create', OrderPolicy::class);
         $customers = Customer::all();
         return view('order.create', compact('customers'));
     }
@@ -36,6 +40,7 @@ class OrderController extends Controller
 
     public function edit(Order $order)
     {
+        $this->authorize('edit', OrderPolicy::class);
         $customers = Customer::all();
         return view('order.edit', compact('order', 'customers'));
     }
@@ -55,6 +60,7 @@ class OrderController extends Controller
 
     public function destroy(Order $order)
     {
+        $this->authorize('delete', OrderPolicy::class);
         $order->delete();
         return redirect()->route('orders.index')->with('success', 'Order berhasil dihapus.');
     }

@@ -13,7 +13,7 @@ class ProjectPolicy
      */
     public function viewAny(User $user): bool
     {
-        return $user->hasRole('super admin');
+        return $user->hasPermissionTo('projects.view');
     }
 
     /**
@@ -21,7 +21,7 @@ class ProjectPolicy
      */
     public function view(User $user, Project $project): bool
     {
-        return $user->hasRole('super admin');
+        return $user->hasPermissionTo('projects.view');
     }
 
     /**
@@ -29,7 +29,7 @@ class ProjectPolicy
      */
     public function create(User $user): bool
     {
-        return $user->hasRole('super admin');
+        return $user->hasPermissionTo('projects.create');
     }
 
     /**
@@ -37,7 +37,7 @@ class ProjectPolicy
      */
     public function update(User $user, Project $project): bool
     {
-        return $user->hasRole('super admin');
+        return $user->hasPermissionTo('projects.update');
     }
 
     /**
@@ -45,7 +45,7 @@ class ProjectPolicy
      */
     public function delete(User $user, Project $project): bool
     {
-        return $user->hasRole('super admin');
+        return $user->hasPermissionTo('projects.delete');
     }
 
     /**
@@ -53,7 +53,7 @@ class ProjectPolicy
      */
     public function restore(User $user, Project $project): bool
     {
-        return $user->hasRole('super admin');
+        return $user->hasPermissionTo('projects.delete');
     }
 
     /**
@@ -61,6 +61,6 @@ class ProjectPolicy
      */
     public function forceDelete(User $user, Project $project): bool
     {
-        return $user->hasRole('super admin');
+        return $user->hasPermissionTo('projects.delete');
     }
 }

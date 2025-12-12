@@ -9,10 +9,12 @@
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 space-y-3">
 
             <!-- Create Project Button -->
-            <a href="{{ route('projects.create') }}"
-                class="inline-block bg-blue-600 p-2 rounded hover:bg-blue-700 text-white font-semibold">
-                Create Project
-            </a>
+            @can('projects.create')
+                <a href="{{ route('projects.create') }}"
+                    class="inline-block bg-blue-600 p-2 rounded hover:bg-blue-700 text-white font-semibold">
+                    Create Project
+                </a>
+            @endcan
 
             @if (session('success'))
                 <div class="mb-4 p-4 bg-green-100 text-green-800 rounded">

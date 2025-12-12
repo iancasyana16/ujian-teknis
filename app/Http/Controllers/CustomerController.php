@@ -3,10 +3,13 @@
 namespace App\Http\Controllers;
 
 use App\Models\Customer;
+use App\Policies\CustomerPolicy;
 use Illuminate\Http\Request;
+use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 
 class CustomerController extends Controller
 {
+    use AuthorizesRequests;
     /**
      * Display a listing of the resource.
      */
@@ -21,6 +24,7 @@ class CustomerController extends Controller
      */
     public function create()
     {
+        $this->authorize('create', CustomerPolicy::class);
         return view('customer.create');
     }
 
@@ -53,6 +57,7 @@ class CustomerController extends Controller
      */
     public function edit(Customer $customer)
     {
+        $this->authorize('edit', CustomerPolicy::class);
         return view('customer.edit', compact('customer'));
     }
 
@@ -77,6 +82,7 @@ class CustomerController extends Controller
      */
     public function destroy(Customer $customer)
     {
+        $this->authorize('delete', CustomerPolicy::class);
         $customer->delete();
         return redirect()->route('customers.index')->with('success', 'Customer berhasil dihapus.');
     }
