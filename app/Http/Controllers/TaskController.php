@@ -15,13 +15,14 @@ class TaskController extends Controller
     use AuthorizesRequests;
     public function index()
     {
+        $this->authorize("tasks.view", TaskPolicy::class);
         $tasks = Task::with(['project', 'assignedTo'])->paginate(10);
         return view('task.index', compact('tasks'));
     }
 
     public function create()
     {
-        $this->authorize('create', TaskPolicy::class);
+        $this->authorize('tasks.create', TaskPolicy::class);
         $projects = Project::all();
         $users = User::all();
 
@@ -44,7 +45,7 @@ class TaskController extends Controller
 
     public function edit(Task $task)
     {
-        $this->authorize('edit', TaskPolicy::class);
+        $this->authorize('tasks.edit', TaskPolicy::class);
         $projects = Project::all();
         $users = User::all();
 
@@ -67,7 +68,7 @@ class TaskController extends Controller
 
     public function destroy(Task $task)
     {
-        $this->authorize('delete', TaskPolicy::class);
+        $this->authorize('tasks.delete', TaskPolicy::class);
         $task->delete();
 
         return redirect()->route('tasks.index')->with('success', 'Task deleted.');

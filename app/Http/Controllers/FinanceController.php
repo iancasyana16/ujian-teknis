@@ -13,6 +13,7 @@ class FinanceController extends Controller
     use AuthorizesRequests;
     public function index()
     {
+        // $this->authorize("viewAny", FinancePolicy::class);
         $finances = Finance::orderBy('date', 'desc')->paginate(10);
         return view('finance.index', compact('finances'));
     }

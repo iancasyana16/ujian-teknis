@@ -72,15 +72,17 @@
                                             Edit
                                         </a>
 
-                                        <form action="{{ route('projects.destroy', $project->id) }}" method="POST"
-                                            class="inline-block">
-                                            @csrf
-                                            @method('DELETE')
-                                            <button type="submit" onclick="return confirm('Are you sure?')"
-                                                class="text-red-600 hover:text-red-900 font-semibold">
-                                                Delete
-                                            </button>
-                                        </form>
+                                        @can('projects.delete')
+                                            <form action="{{ route('projects.destroy', $project->id) }}" method="POST"
+                                                class="inline-block">
+                                                @csrf
+                                                @method('DELETE')
+                                                <button type="submit" onclick="return confirm('Are you sure?')"
+                                                    class="text-red-600 hover:text-red-900 font-semibold">
+                                                    Delete
+                                                </button>
+                                            </form>
+                                        @endcan
                                     </td>
                                 </tr>
                             @endforeach

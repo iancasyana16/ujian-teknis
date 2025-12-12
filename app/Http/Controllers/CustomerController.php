@@ -15,6 +15,7 @@ class CustomerController extends Controller
      */
     public function index()
     {
+        // $this->authorize("viewAny", CustomerPolicy::class);
         $customers = Customer::paginate(10);
         return view("customer.index", compact('customers'));
     }

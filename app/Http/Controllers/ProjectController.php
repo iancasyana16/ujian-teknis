@@ -14,13 +14,14 @@ class ProjectController extends Controller
     use AuthorizesRequests;
     public function index()
     {
+        $this->authorize("projects.view", ProjectPolicy::class);
         $projects = Project::with('manager')->paginate(10);
         return view('project.index', compact('projects'));
     }
 
     public function create()
     {
-        $this->authorize('create', ProjectPolicy::class);
+        $this->authorize('projects.create', ProjectPolicy::class);
         $managers = User::all();
         return view('project.create', compact('managers'));
     }
@@ -45,7 +46,7 @@ class ProjectController extends Controller
 
     public function edit(Project $project)
     {
-        $this->authorize('edit', ProjectPolicy::class);
+        $this->authorize('projects.update', ProjectPolicy::class);
         $managers = User::all();
         return view('project.edit', compact('project', 'managers'));
     }

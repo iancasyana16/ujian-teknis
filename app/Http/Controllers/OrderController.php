@@ -14,6 +14,7 @@ class OrderController extends Controller
     use AuthorizesRequests;
     public function index()
     {
+        $this->authorize('orders.view', OrderPolicy::class);
         $orders = Order::with('customer')->paginate(10);
         return view('order.index', compact('orders'));
     }
