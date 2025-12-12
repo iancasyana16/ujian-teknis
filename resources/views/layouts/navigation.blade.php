@@ -20,21 +20,31 @@
                             {{ __('Users') }}
                         </x-nav-link>
                     @endif
-                    <x-nav-link :href="route('customers.index')" :active="request()->routeIs('customers*')">
-                        {{ __('Customer') }}
-                    </x-nav-link>
-                    <x-nav-link :href="route('projects.index')" :active="request()->routeIs('projects*')">
-                        {{ __('Projects') }}
-                    </x-nav-link>
-                    <x-nav-link :href="route('tasks.index')" :active="request()->routeIs('tasks*')">
-                        {{ __('Tasks') }}
-                    </x-nav-link>
-                    <x-nav-link :href="route('orders.index')" :active="request()->routeIs('orders*')">
-                        {{ __('Orders') }}
-                    </x-nav-link>
-                    <x-nav-link :href="route('finances.index')" :active="request()->routeIs('finances*')">
-                        {{ __('Finances') }}
-                    </x-nav-link>
+                    @can('customers.view')
+                        <x-nav-link :href="route('customers.index')" :active="request()->routeIs('customers*')">
+                            {{ __('Customer') }}
+                        </x-nav-link>
+                    @endcan
+                    @can('projects.view')
+                        <x-nav-link :href="route('projects.index')" :active="request()->routeIs('projects*')">
+                            {{ __('Projects') }}
+                        </x-nav-link>
+                    @endcan
+                    @can('tasks.view')
+                        <x-nav-link :href="route('tasks.index')" :active="request()->routeIs('tasks*')">
+                            {{ __('Tasks') }}
+                        </x-nav-link>
+                    @endcan
+                    @can('orders.view')
+                        <x-nav-link :href="route('orders.index')" :active="request()->routeIs('orders*')">
+                            {{ __('Orders') }}
+                        </x-nav-link>
+                    @endcan
+                    @can('finances.view')
+                        <x-nav-link :href="route('finances.index')" :active="request()->routeIs('finances*')">
+                            {{ __('Finances') }}
+                        </x-nav-link>
+                    @endcan
                 </div>
             </div>
 
