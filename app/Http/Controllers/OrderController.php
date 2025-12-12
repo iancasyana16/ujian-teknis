@@ -21,7 +21,7 @@ class OrderController extends Controller
 
     public function create()
     {
-        $this->authorize('create', OrderPolicy::class);
+        $this->authorize('orders.create', OrderPolicy::class);
         $customers = Customer::all();
         return view('order.create', compact('customers'));
     }
@@ -41,7 +41,7 @@ class OrderController extends Controller
 
     public function edit(Order $order)
     {
-        $this->authorize('edit', OrderPolicy::class);
+        $this->authorize('orders.update', OrderPolicy::class);
         $customers = Customer::all();
         return view('order.edit', compact('order', 'customers'));
     }
@@ -61,7 +61,7 @@ class OrderController extends Controller
 
     public function destroy(Order $order)
     {
-        $this->authorize('delete', OrderPolicy::class);
+        $this->authorize('orders.delete', OrderPolicy::class);
         $order->delete();
         return redirect()->route('orders.index')->with('success', 'Order berhasil dihapus.');
     }

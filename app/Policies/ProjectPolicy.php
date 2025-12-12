@@ -37,8 +37,7 @@ class ProjectPolicy
      */
     public function update(User $user, Project $project): bool
     {
-        // return $user->hasPermissionTo('projects.update');
-        return $user->hasAnyRole(['seper admin', 'staff']);
+        return $user->hasPermissionTo('projects.update');
     }
 
     /**

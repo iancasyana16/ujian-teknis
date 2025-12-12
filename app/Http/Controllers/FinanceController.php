@@ -13,14 +13,14 @@ class FinanceController extends Controller
     use AuthorizesRequests;
     public function index()
     {
-        // $this->authorize("viewAny", FinancePolicy::class);
+        $this->authorize("finances.view", FinancePolicy::class);
         $finances = Finance::orderBy('date', 'desc')->paginate(10);
         return view('finance.index', compact('finances'));
     }
 
     public function create()
     {
-        $this->authorize('create', FinancePolicy::class);
+        $this->authorize('finances.create', FinancePolicy::class);
         return view('finance.create');
     }
 
@@ -40,7 +40,7 @@ class FinanceController extends Controller
 
     public function edit(Finance $finance)
     {
-        $this->authorize('edit', FinancePolicy::class);
+        $this->authorize('finances.update', FinancePolicy::class);
         return view('finance.edit', compact('finance'));
     }
 
@@ -60,7 +60,7 @@ class FinanceController extends Controller
 
     public function destroy(Finance $finance)
     {
-        $this->authorize('delete', FinancePolicy::class);
+        $this->authorize('finances.delete', FinancePolicy::class);
         $finance->delete();
         return redirect()->route('finances.index')->with('success', 'Finance entry deleted successfully.');
     }

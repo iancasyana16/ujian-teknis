@@ -67,10 +67,12 @@
                                     </td>
 
                                     <td class="px-6 py-4 whitespace-nowrap space-x-2">
-                                        <a href="{{ route('projects.edit', $project->id) }}"
-                                            class="text-indigo-600 hover:text-indigo-900 font-semibold">
-                                            Edit
-                                        </a>
+                                        @can('projects.update')
+                                            <a href="{{ route('projects.edit', $project->id) }}"
+                                                class="text-indigo-600 hover:text-indigo-900 font-semibold">
+                                                Edit
+                                            </a>
+                                        @endcan
 
                                         @can('projects.delete')
                                             <form action="{{ route('projects.destroy', $project->id) }}" method="POST"

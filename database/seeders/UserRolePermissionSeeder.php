@@ -60,7 +60,6 @@ class UserRolePermissionSeeder extends Seeder
             'projects.view',
             'projects.create',
             'projects.update',
-            'projects.delete',
             'tasks.view',
             'tasks.create',
             'tasks.update',

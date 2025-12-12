@@ -25,7 +25,7 @@ class CustomerController extends Controller
      */
     public function create()
     {
-        $this->authorize('create', CustomerPolicy::class);
+        $this->authorize('customers.create', CustomerPolicy::class);
         return view('customer.create');
     }
 
@@ -58,7 +58,7 @@ class CustomerController extends Controller
      */
     public function edit(Customer $customer)
     {
-        $this->authorize('edit', CustomerPolicy::class);
+        $this->authorize('customers.edit', CustomerPolicy::class);
         return view('customer.edit', compact('customer'));
     }
 
@@ -83,7 +83,7 @@ class CustomerController extends Controller
      */
     public function destroy(Customer $customer)
     {
-        $this->authorize('delete', CustomerPolicy::class);
+        $this->authorize('customers.delete', CustomerPolicy::class);
         $customer->delete();
         return redirect()->route('customers.index')->with('success', 'Customer berhasil dihapus.');
     }
