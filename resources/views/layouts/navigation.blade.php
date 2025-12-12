@@ -45,6 +45,11 @@
                             {{ __('Finances') }}
                         </x-nav-link>
                     @endcan
+                    @can('reports.view')
+                        <x-nav-link :href="route('reports.index')" :active="request()->routeIs('reports*')">
+                            {{ __('Reports') }}
+                        </x-nav-link>
+                    @endcan
                 </div>
             </div>
 

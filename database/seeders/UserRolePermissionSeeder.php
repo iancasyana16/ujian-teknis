@@ -81,7 +81,8 @@ class UserRolePermissionSeeder extends Seeder
             'finances.delete',
             'projects.view',
             'orders.view',
-            'orders.update'
+            'orders.update',
+            'reports.view',
         ]);
 
         // 4. Buat user dan assign role
