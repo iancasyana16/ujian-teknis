@@ -5,17 +5,22 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Spatie\Permission\Models\Role;
+use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 
 class UserController extends Controller
 {
+    use AuthorizesRequests;
+    
     public function index()
     {
+        $this->authorize('viewAny', User::class);
         $users = User::paginate(10);
         return view("users.index", compact('users'));
     }
 
     public function create()
     {
+        $this->authorize('create', User::class);
         $roles = Role::all();
         return view("users.create", compact("roles"));
     }
@@ -44,6 +49,7 @@ class UserController extends Controller
 
     public function edit(User $user)
     {
+        $this->authorize('create', User::class);
         $roles = Role::all();
         return view('users.edit', compact('user', 'roles'));
     }

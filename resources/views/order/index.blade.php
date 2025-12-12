@@ -50,16 +50,17 @@
                                 <td class="px-6 py-4 whitespace-nowrap space-x-2">
                                     <a href="{{ route('orders.edit', $order->id) }}"
                                         class="text-indigo-600 font-semibold">Edit</a>
-
-                                    <form action="{{ route('orders.destroy', $order->id) }}" method="POST"
-                                        class="inline-block">
-                                        @csrf
-                                        @method('DELETE')
-                                        <button onclick="return confirm('Are you sure?')"
-                                            class="text-red-600 font-semibold">
-                                            Delete
-                                        </button>
-                                    </form>
+                                    @can('orders.delete')
+                                        <form action="{{ route('orders.destroy', $order->id) }}" method="POST"
+                                            class="inline-block">
+                                            @csrf
+                                            @method('DELETE')
+                                            <button onclick="return confirm('Are you sure?')"
+                                                class="text-red-600 font-semibold">
+                                                Delete
+                                            </button>
+                                        </form>
+                                    @endcan
                                 </td>
                             </tr>
                         @endforeach
