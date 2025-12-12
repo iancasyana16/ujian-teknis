@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Order;
+use App\Models\Finance;
 use App\Models\Customer;
 use Illuminate\Http\Request;
 use App\Policies\OrderPolicy;
@@ -55,6 +56,21 @@ class OrderController extends Controller
         ]);
 
         $order->update($data);
+
+        if ($order->status === 'done') {
+            $existingFinance = Finance::where('type', 'income')
+                ->where('description', 'Order #' . $order->id)
+                ->first();
+
+            if (!$existingFinance) {
+                Finance::create([
+                    'type' => 'income',
+                    'amount' => $order->total_amount,
+                    'description' => 'Order #' . $order->id,
+                    'date' => now(),
+                ]);
+            }
+        }
 
         return redirect()->route('orders.index')->with('success', 'Order berhasil diupdate.');
     }

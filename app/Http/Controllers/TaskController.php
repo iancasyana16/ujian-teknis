@@ -16,7 +16,9 @@ class TaskController extends Controller
     public function index()
     {
         $this->authorize("tasks.view", TaskPolicy::class);
-        $tasks = Task::with(['project', 'assignedTo'])->paginate(10);
+        $tasks = Task::with(['project', 'assignedTo'])
+            ->where('assigned_to_user_id', auth()->id())
+            ->paginate(10);
         return view('task.index', compact('tasks'));
     }
 
@@ -45,7 +47,7 @@ class TaskController extends Controller
 
     public function edit(Task $task)
     {
-        $this->authorize('tasks.edit', TaskPolicy::class);
+        $this->authorize('tasks.update', TaskPolicy::class);
         $projects = Project::all();
         $users = User::all();
 
